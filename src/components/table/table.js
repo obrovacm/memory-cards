@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-// import Deck from "../deck/deck"
+// import Deck from "./deck"
 import Card from "../card/card"
 import styles from "./table.module.scss"
 
@@ -15,7 +15,9 @@ export default class table extends Component {
   renderCards = () => {
     const cards = []
     for (let i = 0; i < 24; i++) {
-      cards.push(<Card back={this.props.data.backPattern} key={i} />)
+      cards.push(
+        <Card face={this.props.data.faceImg} flip={"funkcija"} key={i} />
+      )
     }
     // uvedi Deck
     return cards
@@ -24,11 +26,6 @@ export default class table extends Component {
   render() {
     const cards = this.renderCards()
     console.log(this.props, "this.props")
-    return (
-      <div className={styles.table}>
-        {/* <Card back={this.props.data.backPattern} /> */}
-        {cards}
-      </div>
-    )
+    return <div className={styles.table}>{cards}</div>
   }
 }

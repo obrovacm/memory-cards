@@ -14,9 +14,7 @@ $primary: $reddish;
 
 $margin-min: 0 1em;
 $margin-sm: 0 6vw;
-$margin-md: 0 12vw;
-$margin-lg: 0 18vw;
-$margin-xlg: 0 28vw;
+$margin-md: 0 calc((100vw - 600px) / 2);
 
 @mixin sm-screen {
   @media (min-width: 420px) {

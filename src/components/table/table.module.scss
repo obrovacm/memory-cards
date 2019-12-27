@@ -1,22 +1,7 @@
 @import "src/components/layout/variables.scss";
 
 .table {
-  // display: grid;
-  // grid-template-columns: repeat(4, 1fr);
-  // grid-template-rows: repeat(6, 1fr);
-  // grid-gap: 0.2em;
-  // height: 100%;
-  // div {
-  //   background: rgba($black, 0.1);
-  //   height: 60px;
-  // }
-
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
-// .card {
-//   background: $clay3;
-//   height: 100px;
-// }
