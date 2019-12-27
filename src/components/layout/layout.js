@@ -27,13 +27,12 @@ const Layout = ({ children }) => {
     <div className={styles.layout}>
       <div className={styles.content}>
         <h1>{data.site.siteMetadata.title}</h1>
-        <hr />
         {children}
       </div>
       <footer className={styles.footer}>
         © {new Date().getFullYear()}, developed by
         {` `}
-        <a href="https://milos.netlify.com/">milos_dev</a>
+        <a href="https://milos.netlify.com/">@milos_dev</a>
       </footer>
     </div>
   )

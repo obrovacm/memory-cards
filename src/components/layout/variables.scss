@@ -1,7 +1,7 @@
 $white: #f2f2f2;
 $black: #262626;
 $grey: #bfc0c4;
-$denim: #436573;
+$reddish: #9e2405;
 $clay: #d9936a;
 $clay2: #bf755a;
 $clay3: #8c5642;
@@ -10,13 +10,13 @@ $text-color: $black;
 $background-color: $clay;
 $shade: $clay3;
 $shade2: $clay2;
-$primary: $denim;
+$primary: $reddish;
 
 $margin-min: 0 1em;
 $margin-sm: 0 6vw;
 $margin-md: 0 12vw;
 $margin-lg: 0 18vw;
-$margin-xlg: 0 22vw;
+$margin-xlg: 0 28vw;
 
 @mixin sm-screen {
   @media (min-width: 420px) {
