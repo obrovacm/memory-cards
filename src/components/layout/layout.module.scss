@@ -1,0 +1,65 @@
+@import "src/components/layout/variables.scss";
+
+* {
+  box-sizing: border-box;
+}
+body {
+  background: $background-color;
+  min-height: 100vh;
+  color: $text-color;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+p {
+  text-align: justify;
+}
+a {
+  text-decoration: none;
+  color: $primary;
+}
+hr {
+  margin: 0;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.layout {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin: $margin-min;
+  @include sm-screen {
+    margin: $margin-sm;
+  }
+  @include md-screen {
+    margin: $margin-md;
+  }
+  @include lg-screen {
+    margin: $margin-lg;
+  }
+  @include xlg-screen {
+    margin: $margin-xlg;
+  }
+}
+
+.content {
+  h1 {
+    padding: 0.5em 0;
+    text-align: center;
+  }
+  // display: flex;
+  // justify-content: space-between;
+}
+
+.footer {
+  padding: 1em 0;
+  text-align: center;
+}
