@@ -13,8 +13,9 @@ $shade2: $clay2;
 $primary: $reddish;
 
 $margin-min: 0 1em;
-$margin-sm: 0 6vw;
-$margin-md: 0 calc((100vw - 600px) / 2);
+$margin-sm: 0 8vw;
+$margin-md: 0 calc((100vw - 500px) / 2);
+$margin-lg: 0 calc((100vw - 700px) / 2);
 
 @mixin sm-screen {
   @media (min-width: 420px) {
@@ -23,7 +24,7 @@ $margin-md: 0 calc((100vw - 600px) / 2);
 }
 
 @mixin md-screen {
-  @media (min-width: 640px) {
+  @media (min-width: 600px) {
     @content;
   }
 }

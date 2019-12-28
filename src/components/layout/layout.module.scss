@@ -42,6 +42,9 @@ code {
   @include md-screen {
     margin: $margin-md;
   }
+  @include lg-screen {
+    margin: $margin-lg;
+  }
 }
 
 .content {

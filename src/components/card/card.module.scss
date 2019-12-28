@@ -2,17 +2,30 @@
 
 .card {
   position: relative;
+  $gird-gap: calc(0.8em / 3);
   width: calc(25% - 0.2em);
-  margin: 0 calc(0.8em / 3) calc(0.8em / 3) 0;
+  margin: 0 $gird-gap $gird-gap 0;
   &:nth-child(4n) {
     margin-right: 0;
   }
-  height: 90px;
+  height: 95px;
   @include sm-screen {
     height: 120px;
   }
   @include md-screen {
     height: 135px;
+  }
+  @include lg-screen {
+    $gird-gap-lg: calc(1.2em / 5);
+    // height: 90px;
+    width: calc(100% / 6 - 0.2em);
+    margin: 0 $gird-gap-lg $gird-gap-lg 0;
+    &:nth-child(4n) {
+      margin-right: $gird-gap-lg;
+    }
+    &:nth-child(6n) {
+      margin-right: 0;
+    }
   }
 }
 
