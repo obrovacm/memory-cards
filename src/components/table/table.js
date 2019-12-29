@@ -14,9 +14,20 @@ export default class table extends Component {
 
   renderCards = () => {
     const cards = []
+    console.log("card faces:", this.props.data.cardFaces)
+
     for (let i = 0; i < 24; i++) {
+      let j = i
+      if (i > 11) {
+        j = i - 12
+      }
       cards.push(
-        <Card face={this.props.data.faceImg} flip={"funkcija"} key={i} />
+        <Card
+          face={this.props.data.cardFaces.edges[j]}
+          flip={"funkcija"}
+          key={i}
+          number={i}
+        />
       )
     }
     // uvedi Deck
@@ -25,7 +36,6 @@ export default class table extends Component {
 
   render() {
     const cards = this.renderCards()
-    console.log(this.props, "this.props")
     return <div className={styles.table}>{cards}</div>
   }
 }

@@ -8,7 +8,6 @@ import Table from "../components/table/table"
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    {console.log(data)}
     <Table data={data} />
     <Link to="/page-2">Go back to page-2</Link>
   </Layout>
@@ -18,11 +17,17 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query {
-    cardFaces: file(name: { eq: "card-back-small" }) {
-      name
-      childImageSharp {
-        fluid(maxWidth: 256) {
-          ...GatsbyImageSharpFluid
+    cardFaces: allFile(filter: { relativeDirectory: { eq: "deck-faces" } }) {
+      edges {
+        node {
+          id
+          name
+          publicURL
+          childImageSharp {
+            fluid(maxWidth: 256) {
+              ...GatsbyImageSharpFluid
+            }
+          }
         }
       }
     }

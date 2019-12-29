@@ -30,13 +30,7 @@ $margin-lg: 0 calc((100vw - 700px) / 2);
 }
 
 @mixin lg-screen {
-  @media (min-width: 950px) {
-    @content;
-  }
-}
-
-@mixin xlg-screen {
-  @media (min-width: 1300px) {
+  @media (min-width: 850px) {
     @content;
   }
 }

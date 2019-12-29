@@ -1,8 +1,8 @@
 import React from "react"
-// import Img from "gatsby-image"
+import Img from "gatsby-image"
 
 import styles from "./card.module.scss"
-import backSVG from "../../images/card-back.png"
+import back from "../../images/card-back.png"
 
 const Card = props => {
   // const { class, flip, face } = props
@@ -15,10 +15,14 @@ const Card = props => {
       // tabIndex="0"
     >
       <div className={styles.face}>
-        {/* <Img fluid={props.face.childImageSharp.fluid} alt={props.face.name} /> */}
+        {console.log("card props", props)}
+        <Img
+          fluid={props.face.node.childImageSharp.fluid}
+          alt={props.face.node.name}
+        />
       </div>
       <div className={styles.back}>
-        <img src={backSVG} alt="back img" />
+        <img src={back} alt="back img" />
       </div>
     </div>
   )
