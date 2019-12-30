@@ -5,7 +5,7 @@ import styles from "./card.module.scss"
 import back from "../../images/card-back.png"
 
 const Card = props => {
-  const { face, activate, activeClass, matchedClass } = props
+  const { node, activate, activeClass, matchedClass } = props
   return (
     <div
       className={styles.card + " " + activeClass + " " + matchedClass}
@@ -15,8 +15,8 @@ const Card = props => {
       tabIndex="0"
     >
       <div className={styles.face}>
-        {/* {console.log("card props", props)} */}
-        <Img fluid={face.node.childImageSharp.fluid} alt={face.node.name} />
+        {console.log("card props", props)}
+        <Img fluid={node.cardImgFluid} alt={node.name} />
       </div>
       <div className={styles.back}>
         <img src={back} alt="back img" />

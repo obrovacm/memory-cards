@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+
 import CardObj from "./card-object"
 import Card from "../card/card"
 import styles from "./table.module.scss"
@@ -10,13 +11,7 @@ export default class table extends Component {
     this.state = {
       cards: this.createCardState(),
     }
-    // this.createCardState()
   }
-  // state = {
-  //   cards: [],
-  // }
-
-  componentDidMount() {}
 
   createCardState = () => {
     const cards = this.props.data.cardFaces.edges
@@ -32,9 +27,6 @@ export default class table extends Component {
       stateCards[randomPosition2] = new CardObj(cards[i], randomPosition2)
     }
 
-    // this.setState({
-    //   cards: [...stateCards],
-    // })
     return [...stateCards]
   }
 
@@ -60,34 +52,44 @@ export default class table extends Component {
     console.log("activated card on position:", num + 1)
   }
 
-  renderCards = () => {
-    // console.log("card faces:", this.props.data.cardFaces)
+  // renderCards = () => {
+  //   // console.log("card faces:", this.props.data.cardFaces)
 
-    // taking all card nodes, random positions array
-    const cards = this.props.data.cardFaces.edges
-    const shuffledArr = this.randomPositions(cards.length * 2)
-    // creating an array with total number of needed cards (they go in pairs)
-    const shuffledCards = new Array(cards.length * 2)
-    // creating an HTML card template
-    const cardElement = (card, i) => (
+  //   // taking all card nodes, random positions array
+  //   const cards = this.props.data.cardFaces.edges
+  //   const shuffledArr = this.randomPositions(cards.length * 2)
+  //   // creating an array with total number of needed cards (they go in pairs)
+  //   const shuffledCards = new Array(cards.length * 2)
+  //   // creating an HTML card template
+  //   const cardElement = (card, i) => (
+  //     <Card
+  //       face={card}
+  //       activate={() => this.activateCard(i)}
+  //       key={i}
+  //       number={i}
+  //     />
+  //   )
+
+  //   for (let i = 0; i < shuffledArr.length / 2; i++) {
+  //     let randomPosition = shuffledArr[i]
+  //     let randomPosition2 = shuffledArr[shuffledArr.length - 1 - i]
+  //     //taking 2 random positions in order to insert a pair of pictures on each increment of i
+  //     shuffledCards[randomPosition] = cardElement(cards[i], randomPosition)
+  //     shuffledCards[randomPosition2] = cardElement(cards[i], randomPosition2)
+  //   }
+
+  //   return shuffledCards
+  // }
+
+  renderCards = () =>
+    this.state.cards.map((card, i) => (
       <Card
-        face={card}
+        node={card}
         activate={() => this.activateCard(i)}
         key={i}
         number={i}
       />
-    )
-
-    for (let i = 0; i < shuffledArr.length / 2; i++) {
-      let randomPosition = shuffledArr[i]
-      let randomPosition2 = shuffledArr[shuffledArr.length - 1 - i]
-      //taking 2 random positions in order to insert a pair of pictures on each increment of i
-      shuffledCards[randomPosition] = cardElement(cards[i], randomPosition)
-      shuffledCards[randomPosition2] = cardElement(cards[i], randomPosition2)
-    }
-
-    return shuffledCards
-  }
+    ))
 
   render() {
     const cards = this.renderCards()
