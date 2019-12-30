@@ -29,11 +29,13 @@
 }
 
 .card {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg); //brisi
+  transform-style: preserve-3d;
   .back,
   .face {
     position: absolute;
     border-radius: 10px;
+    padding: 3px;
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -45,14 +47,13 @@
   }
   .back {
     background: $clay3;
-    // opacity: 0.1; //uncomment to show faces
   }
   .face {
     transform: rotateY(180deg);
-    background: rgba($grey, 0.9);
+    background: $grey;
     div {
+      min-width: 95%;
       max-height: 100%;
-      min-width: 100%;
     }
     border: 2px solid $black;
     display: flex;
@@ -72,7 +73,7 @@
     }
   }
 }
-.clicked {
+.show {
   transform: rotateY(180deg);
 }
 .matched {
