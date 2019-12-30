@@ -20,9 +20,7 @@ export const pageQuery = graphql`
     cardFaces: allFile(filter: { relativeDirectory: { eq: "deck-faces" } }) {
       edges {
         node {
-          id
           name
-          publicURL
           childImageSharp {
             fluid(maxWidth: 256) {
               ...GatsbyImageSharpFluid

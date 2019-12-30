@@ -65,7 +65,7 @@
 // card UX
 .card {
   cursor: pointer;
-  // transform: rotateY(180deg); //brisi
+  transform: rotateY(180deg); //OBRISI
   transform-style: preserve-3d;
   transition: transform 200ms, opacity 200ms;
   &:active {
@@ -80,6 +80,7 @@
   transform: rotateY(180deg);
 }
 .matched {
+  pointer-events: none;
   opacity: 0.5;
   transform: rotateY(180deg) scale(0.9);
 }
