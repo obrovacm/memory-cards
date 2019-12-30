@@ -48,38 +48,40 @@ export default class table extends Component {
     return randomPositions
   }
 
-  activateCard = num => {
-    console.log("activated card on position:", num + 1)
+  activateCard = index => {
+    const { cards } = this.state
+    // console.log("cards", cards)
+
+    //activating current card
+    const card1 = cards[index]
+    cards[index].activate()
+    //checking for already active cards
+    const card2 = cards.find(
+      card => card.active === true && card.position !== index
+    )
+
+    console.log("aktivna:", card1)
+    console.log("druga aktivna:", card2)
+    if (card2) {
+      //prebrzo zatvara novu kartu, treba da saceka pola sekunde
+      cards[index].active = false
+      cards[card2.position].active = false
+      if (card1.name === card2.name) {
+        cards[index].matched = true
+        cards[card2.position].matched = true
+      }
+    }
+    // setInterval(
+    //   (() => {
+    //   },
+    //   1000)
+    // )
+    this.setState({
+      cards: cards,
+    })
   }
 
-  // renderCards = () => {
-  //   // console.log("card faces:", this.props.data.cardFaces)
-
-  //   // taking all card nodes, random positions array
-  //   const cards = this.props.data.cardFaces.edges
-  //   const shuffledArr = this.randomPositions(cards.length * 2)
-  //   // creating an array with total number of needed cards (they go in pairs)
-  //   const shuffledCards = new Array(cards.length * 2)
-  //   // creating an HTML card template
-  //   const cardElement = (card, i) => (
-  //     <Card
-  //       face={card}
-  //       activate={() => this.activateCard(i)}
-  //       key={i}
-  //       number={i}
-  //     />
-  //   )
-
-  //   for (let i = 0; i < shuffledArr.length / 2; i++) {
-  //     let randomPosition = shuffledArr[i]
-  //     let randomPosition2 = shuffledArr[shuffledArr.length - 1 - i]
-  //     //taking 2 random positions in order to insert a pair of pictures on each increment of i
-  //     shuffledCards[randomPosition] = cardElement(cards[i], randomPosition)
-  //     shuffledCards[randomPosition2] = cardElement(cards[i], randomPosition2)
-  //   }
-
-  //   return shuffledCards
-  // }
+  otherActive = () => this.state.cards.find(card => card.active === true)
 
   renderCards = () =>
     this.state.cards.map((card, i) => (
@@ -93,7 +95,7 @@ export default class table extends Component {
 
   render() {
     const cards = this.renderCards()
-    console.log("state:", this.state)
+    // console.log("state:", this.state)
     return <div className={styles.table}>{cards}</div>
   }
 }

@@ -58,6 +58,9 @@
     div {
       min-width: 95%;
       max-height: 100%;
+      @media (max-width: 350px) {
+        min-width: 110%;
+      }
     }
   }
 }
@@ -65,22 +68,19 @@
 // card UX
 .card {
   cursor: pointer;
-  transform: rotateY(180deg); //OBRISI
+  user-select: none;
+  // transform: rotateY(180deg); //OBRISI
   transform-style: preserve-3d;
-  transition: transform 200ms, opacity 200ms;
+  transition: transform 200ms, opacity 400ms;
   &:active {
-    //taking scale of from .card class so it wouldn't interfere with rotation Y
-    .back,
-    .face {
-      transform: scale(0.96);
-    }
+    transform: scale(0.96);
   }
 }
-.show {
+.active {
   transform: rotateY(180deg);
 }
 .matched {
   pointer-events: none;
-  opacity: 0.5;
-  transform: rotateY(180deg) scale(0.9);
+  opacity: 0.3;
+  transition-delay: 300ms;
 }
