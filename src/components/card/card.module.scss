@@ -1,5 +1,6 @@
 @import "src/components/layout/variables.scss";
 
+// card layout
 .card {
   position: relative;
   $gird-gap: calc(0.8em / 3);
@@ -28,18 +29,18 @@
   }
 }
 
+// card design
 .card {
-  transform: rotateY(180deg); //brisi
-  transform-style: preserve-3d;
   .back,
   .face {
     position: absolute;
-    border-radius: 10px;
-    padding: 3px;
     overflow: hidden;
+
+    border-radius: 10px;
+    border: 2px solid rgba($black, 0.7);
+    padding: 3px;
     height: 100%;
     width: 100%;
-
     img {
       height: 100%;
       width: 100%;
@@ -51,19 +52,21 @@
   .face {
     transform: rotateY(180deg);
     background: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     div {
       min-width: 95%;
       max-height: 100%;
     }
-    border: 2px solid $black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 
+// card UX
 .card {
   cursor: pointer;
+  // transform: rotateY(180deg); //brisi
+  transform-style: preserve-3d;
   transition: transform 200ms, opacity 200ms;
   &:active {
     //taking scale of from .card class so it wouldn't interfere with rotation Y
@@ -78,4 +81,5 @@
 }
 .matched {
   opacity: 0.5;
+  transform: rotateY(180deg) scale(0.9);
 }
