@@ -5,7 +5,6 @@ import Card from "../card/card"
 import styles from "./table.module.scss"
 
 export default class table extends Component {
-  //konstruktorom pokreces funkciju samo jednom, ne na svaki update/render
   constructor(props) {
     super(props)
     this.state = {
@@ -47,15 +46,7 @@ export default class table extends Component {
 
   activateCard = index => {
     const { cards } = this.state
-    //activating current card
-    cards[index].activate()
-    //checking for already active cards
-    const card2 = cards.find(
-      card => card.position !== index && card.active === true
-    )
-    if (card2) {
-      cards[card2.position].activate()
-    }
+    cards[index].active = true
     this.setState({
       cards: cards,
     })
@@ -79,6 +70,8 @@ export default class table extends Component {
           cards: cards,
         })
       }, 1000)
+      //proveravam resenje samo ako su dve karte kliknute
+      if (cards.every(card => card.matched)) console.log("reseno!!")
     }
     console.log(activeCards)
   }
@@ -99,7 +92,6 @@ export default class table extends Component {
   }
 
   componentDidUpdate() {
-    console.log("component update")
     this.evaluateCards()
   }
 }

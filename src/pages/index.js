@@ -9,7 +9,7 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <Table data={data} />
-    <Link to="/page-2">Go to page-2</Link>
+    <Link to="/about">Go to about page.</Link>
   </Layout>
 )
 

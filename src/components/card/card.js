@@ -21,7 +21,6 @@ const Card = props => {
       tabIndex="0"
     >
       <div className={styles.face}>
-        {/* {console.log("card props", props)} */}
         <Img fluid={node.cardImgFluid} alt={node.name} />
       </div>
       <div className={styles.back}>
