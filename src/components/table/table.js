@@ -61,7 +61,6 @@ export default class table extends Component {
       cards[card1.position].active = false
       cards[card2.position].active = false
       if (card1.name === card2.name) {
-        console.log(card1.name, "isti", card2.name)
         cards[card1.position].matched = true
         cards[card2.position].matched = true
       }
@@ -73,7 +72,7 @@ export default class table extends Component {
       //proveravam resenje samo ako su dve karte kliknute
       if (cards.every(card => card.matched)) console.log("reseno!!")
     }
-    console.log(activeCards)
+    // console.log(activeCards)
   }
 
   renderCards = () =>

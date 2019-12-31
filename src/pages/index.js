@@ -17,7 +17,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query {
-    cardFaces: allFile(filter: { relativeDirectory: { eq: "deck-faces" } }) {
+    cardFaces: allFile(filter: { relativeDirectory: { eq: "deck" } }) {
       edges {
         node {
           name

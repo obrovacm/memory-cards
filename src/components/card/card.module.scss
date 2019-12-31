@@ -35,6 +35,7 @@
   .face {
     position: absolute;
     overflow: hidden;
+    pointer-events: none;
 
     border-radius: 10px;
     border: 2px solid rgba($black, 0.7);
@@ -69,18 +70,22 @@
 .card {
   cursor: pointer;
   user-select: none;
-  // transform: rotateY(180deg); //OBRISI
   transform-style: preserve-3d;
   transition: transform 200ms, opacity 400ms;
-  &:active {
-    // transform: scale(0.96);
+  &:active .back {
+    box-shadow: inset 3px 3px 2px $black;
   }
 }
-.active {
+.card.active {
+  pointer-events: none;
   transform: rotateY(180deg);
 }
-.matched {
+.card.matched {
+  .back {
+    opacity: 0;
+  }
   pointer-events: none;
+  transform: rotateY(180deg);
   opacity: 0.3;
   transition-delay: 300ms;
 }
