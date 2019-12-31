@@ -73,7 +73,7 @@
   transform-style: preserve-3d;
   transition: transform 200ms, opacity 400ms;
   &:active {
-    transform: scale(0.96);
+    // transform: scale(0.96);
   }
 }
 .active {

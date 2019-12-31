@@ -26,7 +26,6 @@ export default class table extends Component {
       stateCards[randomPosition] = new CardObj(cards[i], randomPosition)
       stateCards[randomPosition2] = new CardObj(cards[i], randomPosition2)
     }
-
     return [...stateCards]
   }
 
@@ -36,7 +35,6 @@ export default class table extends Component {
     for (let i = 0; i < numberOfElements; i++) {
       deckPositions.push(i)
     }
-
     // taking out random elements from deckPositions until it's empty
     while (deckPositions.length !== 0) {
       // randomNumber is generated based on deckPositions length
@@ -44,44 +42,46 @@ export default class table extends Component {
       // splice removes an element from first array and pushes it into second
       randomPositions.push(...deckPositions.splice(randomNumber, 1))
     }
-
     return randomPositions
   }
 
   activateCard = index => {
     const { cards } = this.state
-    // console.log("cards", cards)
-
     //activating current card
-    const card1 = cards[index]
     cards[index].activate()
     //checking for already active cards
     const card2 = cards.find(
-      card => card.active === true && card.position !== index
+      card => card.position !== index && card.active === true
     )
-
-    console.log("aktivna:", card1)
-    console.log("druga aktivna:", card2)
     if (card2) {
-      //prebrzo zatvara novu kartu, treba da saceka pola sekunde
-      cards[index].active = false
-      cards[card2.position].active = false
-      if (card1.name === card2.name) {
-        cards[index].matched = true
-        cards[card2.position].matched = true
-      }
+      cards[card2.position].activate()
     }
-    // setInterval(
-    //   (() => {
-    //   },
-    //   1000)
-    // )
     this.setState({
       cards: cards,
     })
   }
 
-  otherActive = () => this.state.cards.find(card => card.active === true)
+  evaluateCards = () => {
+    const { cards } = this.state
+    const activeCards = cards.filter(card => card.active === true)
+    if (activeCards.length === 2) {
+      let card1 = activeCards[0]
+      let card2 = activeCards[1]
+      cards[card1.position].active = false
+      cards[card2.position].active = false
+      if (card1.name === card2.name) {
+        console.log(card1.name, "isti", card2.name)
+        cards[card1.position].matched = true
+        cards[card2.position].matched = true
+      }
+      setTimeout(() => {
+        this.setState({
+          cards: cards,
+        })
+      }, 1000)
+    }
+    console.log(activeCards)
+  }
 
   renderCards = () =>
     this.state.cards.map((card, i) => (
@@ -95,7 +95,11 @@ export default class table extends Component {
 
   render() {
     const cards = this.renderCards()
-    // console.log("state:", this.state)
     return <div className={styles.table}>{cards}</div>
+  }
+
+  componentDidUpdate() {
+    console.log("component update")
+    this.evaluateCards()
   }
 }

@@ -8,18 +8,12 @@ class CardObj {
   }
 
   activate() {
-    this.active = !this.active
+    this.active = true
     // this.active = true
     // setTimeout(function() {
     //   this.active = false
     // }, 1500)
-  }
-  deActivate() {
-    this.active = false
-  }
-  match() {
-    this.matched = true
-  }
+  } // PRIMENI OVE FUNKCIJE UMESTO =TRUE
 }
 
 export default CardObj
