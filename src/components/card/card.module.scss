@@ -71,7 +71,7 @@
   cursor: pointer;
   user-select: none;
   transform-style: preserve-3d;
-  transition: transform 200ms, opacity 400ms;
+  transition: transform 200ms, opacity 300ms;
   &:active .back {
     box-shadow: inset 3px 3px 2px $black;
   }
@@ -87,5 +87,5 @@
   pointer-events: none;
   transform: rotateY(180deg);
   opacity: 0.3;
-  transition-delay: 300ms;
+  transition-delay: 200ms;
 }

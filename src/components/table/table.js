@@ -69,8 +69,8 @@ export default class table extends Component {
           cards: cards,
         })
       }, 1000)
-      //proveravam resenje samo ako su dve karte kliknute
-      if (cards.every(card => card.matched)) console.log("reseno!!")
+      //check if the game is finished
+      if (cards.every(card => card.matched)) console.log("Solved!!")
     }
     // console.log(activeCards)
   }
@@ -94,3 +94,5 @@ export default class table extends Component {
     this.evaluateCards()
   }
 }
+
+// high-score in local storage, timer and congrats message!

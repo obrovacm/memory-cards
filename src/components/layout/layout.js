@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          author
         }
       }
     }
@@ -32,7 +33,7 @@ const Layout = ({ children }) => {
       <footer className={styles.footer}>
         © {new Date().getFullYear()}, developed by
         {` `}
-        <a href="https://milos.netlify.com/">@milos_dev</a>
+        <a href="https://milos.netlify.com/">{data.site.siteMetadata.author}</a>
       </footer>
     </div>
   )
