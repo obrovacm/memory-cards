@@ -1,9 +1,13 @@
 @import "src/components/layout/variables.scss";
 
 .table {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
   user-select: none;
+}
+
+.msg {
 }

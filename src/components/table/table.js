@@ -2,9 +2,11 @@ import React, { Component } from "react"
 
 import CardObj from "./card-object"
 import Card from "../card/card"
+import Timer from "../timer/timer"
+
 import styles from "./table.module.scss"
 
-export default class table extends Component {
+export default class Table extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -87,7 +89,12 @@ export default class table extends Component {
 
   render() {
     const cards = this.renderCards()
-    return <div className={styles.table}>{cards}</div>
+    return (
+      <>
+        <div className={styles.table}>{cards}</div>
+        <Timer />
+      </>
+    )
   }
 
   componentDidUpdate() {
