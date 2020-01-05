@@ -7,8 +7,12 @@ import SEO from "../components/layout/seo"
 const About = () => (
   <Layout>
     <SEO title="About" />
-    <p>Welcome to About page</p>
-    <Link to="/">Go back to the start page</Link>
+    <h3>Welcome to About page</h3>
+    <Link to="/">
+      <h5>
+        Go back to the <i>Start</i> page
+      </h5>
+    </Link>
   </Layout>
 )
 

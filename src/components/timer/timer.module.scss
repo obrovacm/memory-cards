@@ -1,8 +1,13 @@
 @import "src/components/layout/variables.scss";
 
 .timer-frame {
+  margin: 1em 0;
 }
 .timer {
 }
 .high-score {
+  ol {
+    list-style: upper-roman;
+    margin-left: 3em;
+  }
 }

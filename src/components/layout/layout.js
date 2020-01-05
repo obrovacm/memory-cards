@@ -31,9 +31,14 @@ const Layout = ({ children }) => {
         {children}
       </div>
       <footer className={styles.footer}>
-        © {new Date().getFullYear()}, developed by
-        {` `}
-        <a href="https://milos.netlify.com/">{data.site.siteMetadata.author}</a>
+        <hr />
+        <div>
+          © {new Date().getFullYear()}, developed by
+          {` `}
+          <a href="https://milos.netlify.com/">
+            {data.site.siteMetadata.author}
+          </a>
+        </div>
       </footer>
     </div>
   )

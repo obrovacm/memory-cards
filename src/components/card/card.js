@@ -6,15 +6,15 @@ import back from "../../images/card-back.png"
 
 const Card = props => {
   const { node, activate } = props
+  const cardClass =
+    styles.card +
+    " " +
+    (node.active ? styles.active : "") +
+    " " +
+    (node.matched ? styles.matched : "")
   return (
     <div
-      className={
-        styles.card +
-        " " +
-        (node.active && styles.active) +
-        " " +
-        (node.matched && styles.matched)
-      }
+      className={cardClass}
       onClick={() => activate()}
       onKeyDown={() => activate()}
       role="menuitem"

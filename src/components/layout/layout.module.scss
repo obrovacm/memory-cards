@@ -56,9 +56,12 @@ code {
     text-align: center;
     text-shadow: 3px 0 $shade2;
   }
+  h5 {
+    margin: 0;
+  }
 }
 
-.footer {
+.footer div {
   padding: 0.5em 0;
   text-align: center;
 }

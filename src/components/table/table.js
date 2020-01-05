@@ -11,6 +11,8 @@ export default class Table extends Component {
     super(props)
     this.state = {
       cards: this.createCardState(),
+      start: false,
+      solved: false,
     }
   }
 
@@ -57,9 +59,9 @@ export default class Table extends Component {
   evaluateCards = () => {
     const { cards } = this.state
     const activeCards = cards.filter(card => card.active === true)
+    let card1 = activeCards[0]
+    let card2 = activeCards[1]
     if (activeCards.length === 2) {
-      let card1 = activeCards[0]
-      let card2 = activeCards[1]
       cards[card1.position].active = false
       cards[card2.position].active = false
       if (card1.name === card2.name) {
@@ -71,10 +73,13 @@ export default class Table extends Component {
           cards: cards,
         })
       }, 1000)
-      //check if the game is finished
-      if (cards.every(card => card.matched)) console.log("Solved!!")
+      //check if the puzzle is solved
+      if (cards.every(card => card.matched)) {
+        this.setState({
+          solved: true,
+        })
+      }
     }
-    // console.log(activeCards)
   }
 
   renderCards = () =>
@@ -88,11 +93,19 @@ export default class Table extends Component {
     ))
 
   render() {
+    const { start, solved } = this.state
+    const solvedMessageClass =
+      styles.message + " " + (solved ? styles.solved : "")
     const cards = this.renderCards()
     return (
       <>
-        <div className={styles.table}>{cards}</div>
-        <Timer />
+        <div className={styles.table}>
+          {cards}
+          <div className={solvedMessageClass}>
+            <h1>Congrats!</h1>
+          </div>
+        </div>
+        <Timer start={start} solved={solved} />
       </>
     )
   }
@@ -102,4 +115,4 @@ export default class Table extends Component {
   }
 }
 
-// high-score in local storage, timer and congrats message!
+// high-score in local storage
