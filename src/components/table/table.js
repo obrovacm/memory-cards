@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import CardObj from "./card-object"
 import Card from "../card/card"
-import Timer from "../timer/timer"
+import Records from "../records/records"
 
 import styles from "./table.module.scss"
 
@@ -19,10 +19,10 @@ export default class Table extends Component {
   createCardState = () => {
     const cards = this.props.data.cardFaces.edges
     const shuffledArr = this.randomPositions(cards.length * 2)
-    // creating an array with total number of needed cards (they go in pairs)
+    // creating an array with total number of needed cards (they go in pairs, hence x2)
     const stateCards = new Array(cards.length * 2)
-
-    for (let i = 0; i < shuffledArr.length / 2; i++) {
+    //each card is inserted twice, hence condition
+    for (let i = 0; i < cards.length; i++) {
       let randomPosition = shuffledArr[i]
       let randomPosition2 = shuffledArr[shuffledArr.length - 1 - i]
       //taking 2 random positions in order to insert a pair of pictures on each increment of i
@@ -54,6 +54,12 @@ export default class Table extends Component {
     this.setState({
       cards: cards,
     })
+    // setting timer on first click
+    if (!this.state.start) {
+      this.setState({
+        start: true,
+      })
+    }
   }
 
   evaluateCards = () => {
@@ -105,7 +111,18 @@ export default class Table extends Component {
             <h1>Congrats!</h1>
           </div>
         </div>
-        <Timer start={start} solved={solved} />
+        <Records start={start} solved={solved} />
+
+        {/* DELETE */}
+        <button
+          onClick={() => {
+            this.setState({
+              solved: true,
+            })
+          }}
+        >
+          test local storage: SOLVED
+        </button>
       </>
     )
   }
