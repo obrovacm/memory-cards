@@ -9,32 +9,38 @@ export default class Records extends Component {
     currentScore: undefined,
   }
 
+  // local storage writing is done here as opposed in 'componentDidMount' in order to prevent infinite loop
   getSolvedTime = time => {
     const { highScores } = this.state
     let newLocalHighScores
+    // this prevents deploy errors on Netlify, because "localStorage" is not available during server side rendering.
+    if (localStorage) {
+      const localHighScores = localStorage.getItem("localHighScores")
+      // if local storage exists, add current score if it's fast enough
+      if (localHighScores) {
+        const localHighScoresArr = JSON.parse(localHighScores)
+        // always add currentScore to localStorage array, sort it, and then cut first 3
+        localHighScoresArr.push(time)
+        // less seconds - higher score
+        localHighScoresArr.sort((a, b) => a - b)
+        newLocalHighScores = localHighScoresArr.splice(0, 3)
 
-    const localHighScores = localStorage.getItem("localHighScores")
-    // if local storage exists, add current score if it's fast enough
-    if (localHighScores) {
-      const localHighScoresArr = JSON.parse(localHighScores)
-      // always add currentScore to localStorage array, sort it, and then cut first 3
-      localHighScoresArr.push(time)
-      // less seconds - higher score
-      localHighScoresArr.sort((a, b) => a - b)
-      newLocalHighScores = localHighScoresArr.splice(0, 3)
-
-      // else create new localHighScores with currentScore at first place
-    } else {
-      newLocalHighScores = [...highScores]
-      newLocalHighScores[0] = time
+        // else create new localHighScores with currentScore at first place
+      } else {
+        newLocalHighScores = [...highScores]
+        newLocalHighScores[0] = time
+      }
+      // create new local storage high scores
+      localStorage.setItem(
+        "localHighScores",
+        JSON.stringify(newLocalHighScores)
+      )
+      // and change component state accordingly
+      this.setState({
+        highScore: [...newLocalHighScores],
+        currentScore: time,
+      })
     }
-    // create new local storage high scores
-    localStorage.setItem("localHighScores", JSON.stringify(newLocalHighScores))
-    // and change component state accordingly
-    this.setState({
-      highScore: [...newLocalHighScores],
-      currentScore: time,
-    })
   }
 
   render() {
