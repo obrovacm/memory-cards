@@ -5,66 +5,42 @@ import styles from "./records.module.scss"
 
 export default class Records extends Component {
   state = {
-    highScores: {
-      first: 0,
-      second: 0,
-      third: 0,
-    },
+    highScores: [999, 999, 999],
     currentScore: undefined,
   }
 
   getSolvedTime = time => {
+    const { highScores } = this.state
+    let newLocalHighScores
+
+    const localHighScores = localStorage.getItem("localHighScores")
+    // if local storage exists, add current score if it's fast enough
+    if (localHighScores) {
+      const localHighScoresArr = JSON.parse(localHighScores)
+      // always add currentScore to localStorage array, sort it, and then cut first 3
+      localHighScoresArr.push(time)
+      // less seconds - higher score
+      localHighScoresArr.sort((a, b) => a - b)
+      newLocalHighScores = localHighScoresArr.splice(0, 3)
+
+      // else create new localHighScores with currentScore at first place
+    } else {
+      newLocalHighScores = [...highScores]
+      newLocalHighScores[0] = time
+    }
+    // create new local storage high scores
+    localStorage.setItem("localHighScores", JSON.stringify(newLocalHighScores))
+    // and change component state accordingly
     this.setState({
+      highScore: [...newLocalHighScores],
       currentScore: time,
     })
-  }
-
-  // setter
-  // localStorage.setItem('myData', data);
-  // // getter
-  // localStorage.getItem('myData');
-  // // remove
-  // localStorage.removeItem('myData');
-  // // remove all
-  // localStorage.clear();
-  componentDidUpdate() {
-    const { highScores, currentScore } = this.state
-    // if current score exists, it means that the puzzle is solved
-    if (currentScore) {
-      const localHighScores = localStorage.getItem("localHighScores")
-
-      if (localHighScores) {
-        // if local storage exists, add current score if it's fast enough
-        const objLocalHighScores = JSON.parse(localHighScores)
-        if (currentScore < objLocalHighScores.first) {
-          objLocalHighScores.first = currentScore
-        } else if (
-          currentScore < objLocalHighScores.second ||
-          objLocalHighScores.second === 0
-        ) {
-          objLocalHighScores.second = currentScore
-        } else if (
-          currentScore < objLocalHighScores.third ||
-          objLocalHighScores.third === 0
-        ) {
-          objLocalHighScores.third = currentScore
-        }
-
-        localStorage.setItem(
-          "localHighScores",
-          JSON.stringify(objLocalHighScores)
-        )
-      } else {
-        // create new localHighScores with current at first place
-        highScores.first = currentScore
-        localStorage.setItem("localHighScores", JSON.stringify(highScores))
-      }
-    }
   }
 
   render() {
     const { highScores, currentScore } = this.state
     const localHighScores = localStorage.getItem("localHighScores")
+    // if there's no local storage, use default state
     const currentHighScores = localHighScores
       ? JSON.parse(localHighScores)
       : highScores
@@ -81,13 +57,15 @@ export default class Records extends Component {
 
     return (
       <div className={styles.records}>
-        <div className={styles.timer}>Timer: {renderedTime}</div>
+        <div className={styles.timer}>
+          Timer: <b>{renderedTime}</b> seconds
+        </div>
         <div className={styles.highScore}>
           <p>High scores:</p>
           <ol>
-            <li>{currentHighScores.first} sec</li>
-            <li>{currentHighScores.second} sec</li>
-            <li>{currentHighScores.third} sec</li>
+            <li>{currentHighScores[0]} sec</li>
+            <li>{currentHighScores[1]} sec</li>
+            <li>{currentHighScores[2]} sec</li>
           </ol>
         </div>
       </div>

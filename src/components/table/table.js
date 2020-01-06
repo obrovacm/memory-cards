@@ -49,11 +49,13 @@ export default class Table extends Component {
   }
 
   activateCard = index => {
-    const { cards } = this.state
-    cards[index].active = true
-    this.setState({
-      cards: cards,
-    })
+    if (!this.state.solved) {
+      const { cards } = this.state
+      cards[index].active = true
+      this.setState({
+        cards: cards,
+      })
+    }
     // setting timer on first click
     if (!this.state.start) {
       this.setState({

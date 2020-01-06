@@ -4,6 +4,13 @@
   margin: 1em 0;
 }
 .timer {
+  display: inline-block;
+  b {
+    margin: 0 0.2em;
+    padding: 0 0.5em;
+    font-size: 1.3em;
+    background: rgba($white, 0.3);
+  }
 }
 .high-score {
   ol {
