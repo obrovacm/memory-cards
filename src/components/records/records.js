@@ -13,39 +13,37 @@ export default class Records extends Component {
   getSolvedTime = time => {
     const { highScores } = this.state
     let newLocalHighScores
-    // this prevents deploy errors on Netlify, because "localStorage" is not available during server side rendering.
-    if (localStorage) {
-      const localHighScores = localStorage.getItem("localHighScores")
-      // if local storage exists, add current score if it's fast enough
-      if (localHighScores) {
-        const localHighScoresArr = JSON.parse(localHighScores)
-        // always add currentScore to localStorage array, sort it, and then cut first 3
-        localHighScoresArr.push(time)
-        // less seconds - higher score
-        localHighScoresArr.sort((a, b) => a - b)
-        newLocalHighScores = localHighScoresArr.splice(0, 3)
+    const localHighScores = localStorage.getItem("localHighScores")
+    // if local storage exists, add current score if it's fast enough
+    if (localHighScores) {
+      const localHighScoresArr = JSON.parse(localHighScores)
+      // always add currentScore to localStorage array, sort it, and then cut first 3
+      localHighScoresArr.push(time)
+      // less seconds - higher score
+      localHighScoresArr.sort((a, b) => a - b)
+      newLocalHighScores = localHighScoresArr.splice(0, 3)
 
-        // else create new localHighScores with currentScore at first place
-      } else {
-        newLocalHighScores = [...highScores]
-        newLocalHighScores[0] = time
-      }
-      // create new local storage high scores
-      localStorage.setItem(
-        "localHighScores",
-        JSON.stringify(newLocalHighScores)
-      )
-      // and change component state accordingly
-      this.setState({
-        highScore: [...newLocalHighScores],
-        currentScore: time,
-      })
+      // else create new localHighScores with currentScore at first place
+    } else {
+      newLocalHighScores = [...highScores]
+      newLocalHighScores[0] = time
     }
+    // create new local storage high scores
+    localStorage.setItem("localHighScores", JSON.stringify(newLocalHighScores))
+    // and change component state accordingly
+    this.setState({
+      highScore: [...newLocalHighScores],
+      currentScore: time,
+    })
   }
 
   render() {
     const { highScores, currentScore } = this.state
-    const localHighScores = localStorage.getItem("localHighScores")
+    const localHighScores
+    // this prevents deploy errors on Netlify, because "localStorage" is not available during server side rendering.
+    if (localStorage){
+      localHighScores = localStorage.getItem("localHighScores")
+    }
     // if there's no local storage, use default state
     const currentHighScores = localHighScores
       ? JSON.parse(localHighScores)
