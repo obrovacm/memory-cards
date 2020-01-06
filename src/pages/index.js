@@ -9,7 +9,7 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <Table data={data} />
-    <Link to="/about">
+    <Link to="/about" className="nav-link">
       <h5>
         Go to the <i>About</i> page.
       </h5>

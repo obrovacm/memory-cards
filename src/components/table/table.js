@@ -114,17 +114,6 @@ export default class Table extends Component {
           </div>
         </div>
         <Records start={start} solved={solved} />
-
-        {/* DELETE */}
-        <button
-          onClick={() => {
-            this.setState({
-              solved: true,
-            })
-          }}
-        >
-          test local storage: SOLVED
-        </button>
       </>
     )
   }
@@ -133,5 +122,3 @@ export default class Table extends Component {
     this.evaluateCards()
   }
 }
-
-// high-score in local storage

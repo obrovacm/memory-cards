@@ -45,9 +45,6 @@ export default class Records extends Component {
       ? JSON.parse(localHighScores)
       : highScores
 
-    console.log("currentHighScores", currentHighScores)
-    console.log("localHighScores", JSON.parse(localHighScores))
-
     const renderedTime =
       currentScore === undefined ? (
         <Timer data={this.props} getSolvedTime={this.getSolvedTime} />

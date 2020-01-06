@@ -35,7 +35,11 @@ const Layout = ({ children }) => {
         <div>
           © {new Date().getFullYear()}, developed by
           {` `}
-          <a href="https://milos.netlify.com/">
+          <a
+            href="https://milos.netlify.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {data.site.siteMetadata.author}
           </a>
         </div>
