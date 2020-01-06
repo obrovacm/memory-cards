@@ -41,7 +41,7 @@ export default class Records extends Component {
     const { highScores, currentScore } = this.state
     let localHighScores
     // this prevents deploy errors on Netlify, because "localStorage" is not available during server side rendering.
-    if (localStorage) {
+    if (window.opener && !window.opener.closed) {
       localHighScores = localStorage.getItem("localHighScores")
     }
     // if there's no local storage, use default state
