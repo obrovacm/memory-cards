@@ -9,6 +9,10 @@ import styles from "./table.module.scss"
 export default class Table extends Component {
   constructor(props) {
     super(props)
+    this.randomPositions.bind(this)
+    this.createCardState.bind(this)
+    this.activateCard.bind(this)
+    this.evaluateCards.bind(this)
     this.state = {
       cards: this.createCardState(),
       start: false,
@@ -16,23 +20,7 @@ export default class Table extends Component {
     }
   }
 
-  createCardState = () => {
-    const cards = this.props.data.cardFaces.edges
-    const shuffledArr = this.randomPositions(cards.length * 2)
-    // creating an array with total number of needed cards (they go in pairs, hence x2)
-    const stateCards = new Array(cards.length * 2)
-    //each card is inserted twice, hence condition
-    for (let i = 0; i < cards.length; i++) {
-      let randomPosition = shuffledArr[i]
-      let randomPosition2 = shuffledArr[shuffledArr.length - 1 - i]
-      //taking 2 random positions in order to insert a pair of pictures on each increment of i
-      stateCards[randomPosition] = new CardObj(cards[i], randomPosition)
-      stateCards[randomPosition2] = new CardObj(cards[i], randomPosition2)
-    }
-    return [...stateCards]
-  }
-
-  randomPositions = numberOfElements => {
+  randomPositions(numberOfElements) {
     const deckPositions = []
     const randomPositions = []
     for (let i = 0; i < numberOfElements; i++) {
@@ -48,23 +36,39 @@ export default class Table extends Component {
     return randomPositions
   }
 
-  activateCard = index => {
-    if (!this.state.solved) {
-      const { cards } = this.state
+  createCardState() {
+    const cards = this.props.data.cardFaces.edges
+    const shuffledArr = this.randomPositions(cards.length * 2)
+    // creating an array with total number of needed cards (they go in pairs, hence x2)
+    const stateCards = new Array(cards.length * 2)
+    //each card is inserted twice, hence condition
+    for (let i = 0; i < cards.length; i++) {
+      let randomPosition = shuffledArr[i]
+      let randomPosition2 = shuffledArr[shuffledArr.length - 1 - i]
+      //taking 2 random positions in order to insert a pair of pictures on each increment of i
+      stateCards[randomPosition] = new CardObj(cards[i], randomPosition)
+      stateCards[randomPosition2] = new CardObj(cards[i], randomPosition2)
+    }
+    return [...stateCards]
+  }
+
+  activateCard(index) {
+    const { cards, solved, start } = this.state
+    if (!solved) {
       cards[index].active = true
-      this.setState({
+      this.setState(() => ({
         cards: cards,
-      })
+      }))
     }
     // setting timer on first click
-    if (!this.state.start) {
-      this.setState({
+    if (!start) {
+      this.setState(() => ({
         start: true,
-      })
+      }))
     }
   }
 
-  evaluateCards = () => {
+  evaluateCards() {
     const { cards } = this.state
     const activeCards = cards.filter(card => card.active === true)
     let card1 = activeCards[0]
@@ -77,15 +81,15 @@ export default class Table extends Component {
         cards[card2.position].matched = true
       }
       setTimeout(() => {
-        this.setState({
+        this.setState(() => ({
           cards: cards,
-        })
+        }))
       }, 1000)
       //check if the puzzle is solved
       if (cards.every(card => card.matched)) {
-        this.setState({
+        this.setState(() => ({
           solved: true,
-        })
+        }))
       }
     }
   }
