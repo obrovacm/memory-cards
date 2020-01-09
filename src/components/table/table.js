@@ -7,12 +7,14 @@ import Records from "../records/records"
 import styles from "./table.module.scss"
 
 export default class Table extends Component {
+  // state = {
+  //   cards: this.createCardState(), // ERROR here if it's without 'constructor'
+  //   start: false,
+  //   solved: false,
+  // }
+
   constructor(props) {
     super(props)
-    this.randomPositions.bind(this)
-    this.createCardState.bind(this)
-    this.activateCard.bind(this)
-    this.evaluateCards.bind(this)
     this.state = {
       cards: this.createCardState(),
       start: false,
@@ -20,7 +22,7 @@ export default class Table extends Component {
     }
   }
 
-  randomPositions(numberOfElements) {
+  randomPositions = numberOfElements => {
     const deckPositions = []
     const randomPositions = []
     for (let i = 0; i < numberOfElements; i++) {
@@ -36,7 +38,7 @@ export default class Table extends Component {
     return randomPositions
   }
 
-  createCardState() {
+  createCardState = () => {
     const cards = this.props.data.cardFaces.edges
     const shuffledArr = this.randomPositions(cards.length * 2)
     // creating an array with total number of needed cards (they go in pairs, hence x2)
@@ -52,7 +54,7 @@ export default class Table extends Component {
     return [...stateCards]
   }
 
-  activateCard(index) {
+  activateCard = index => {
     const { cards, solved, start } = this.state
     if (!solved) {
       cards[index].active = true
@@ -68,7 +70,7 @@ export default class Table extends Component {
     }
   }
 
-  evaluateCards() {
+  evaluateCards = () => {
     const { cards } = this.state
     const activeCards = cards.filter(card => card.active === true)
     let card1 = activeCards[0]
